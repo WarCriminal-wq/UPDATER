@@ -42,7 +42,7 @@ To install Updater, clone the repository and run the installation script:
 ```bash
 git clone https://github.com/WarCriminal-wq/UPDATER-end-of-sem-project-.git
 cd UPDATER-end-of-sem-project-
-./installV2.sh
+./install-V2.sh
 
 Usage
 Run the updater script to start the program:
