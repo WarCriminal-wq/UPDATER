@@ -49,10 +49,4 @@ Run the updater script to start the program:
 
 updater
 
-Follow the on-screen instructions to navigate through the menu and perform various tasks.
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Author
-Created by Jonny L
