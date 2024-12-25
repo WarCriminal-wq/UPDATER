@@ -1,12 +1,7 @@
 # UPDATER-end-of-sem-project-
 
-██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗██████╗ 
-██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██╔══██╗
-██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  ██████╔╝
-██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  ██╔══██╗
-╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗██║  ██║
- ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
- Version 1.0                                       Jonny L
+<img width="452" alt="Screenshot 2024-12-26 at 12 48 01 AM" src="https://github.com/user-attachments/assets/c010b0ec-b783-4d2d-9d64-1105b9ebef38" />
+
 
  Updater is a command-line tool designed to manage and maintain your system's packages and configurations efficiently. It provides a user-friendly interface to perform various system tasks, including updating and upgrading packages, viewing system and network information, and managing package installations.
 
