@@ -29,6 +29,7 @@ install_script() {
     case $os_type in
         "macos")
             brew install dialog termshark bmon speedtest-cli btop >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            mkdir $HOME/.local/bin
             ;;
         "debian")
             sudo apt update >> "$log_file" 2>&1 || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
