@@ -33,13 +33,15 @@ install_script() {
             ;;
         "debian")
             sudo apt update >> "$log_file" 2>&1 || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
-            sudo apt install -y dialog termshark bmon btop >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo apt install -y dialog go bmon btop >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash >> "$log_file" 2>&1 || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install speedtest >> "$log_file" 2>&1 || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
+            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 >> "$log_file" 2>&1 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             ;;
         "fedora")
-            sudo dnf install -y dialog termshark bmon btop >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo dnf install -y dialog go bmon btop >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             pip3 install speedtest-cli >> "$log_file" 2>&1 || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
+            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 >> "$log_file" 2>&1 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             ;;
     esac
 
