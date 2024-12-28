@@ -29,19 +29,19 @@ install_script() {
     echo "Installing dependencies for $os_type..."
     case $os_type in
         "macos")
-            brew install dialog termshark bmon speedtest-cli btop || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            brew install dialog termshark bmon speedtest-cli btop fastfetch || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             mkdir $HOME/.local/bin
             ;;
         "debian")
             sudo apt update || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
-            sudo apt install -y dialog bmon btop python3-dev python3-pip golang termshark || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo apt install -y dialog bmon btop python3-dev python3-pip golang termshark curl iproute2 iputils-ping fastfetch|| { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install -y speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             
             ;;
         "fedora")
             sudo dnf update -y
-            sudo dnf install -y dialog bmon btop python3 python3-pip go wget curl|| { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo dnf install -y dialog bmon btop python3 python3-pip go wget curl iproute2 iputils-ping fastfetch || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             sudo dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
