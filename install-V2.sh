@@ -36,14 +36,19 @@ install_script() {
             sudo apt install -y dialog bmon btop python3-dev python3-pip go || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
-            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
-            
+            sudo apt install -y snapd || { echo "Failed to install Snap. Check $log_file for details."; exit 1; }
+            exec $SHELL 
+            sudo ln -s /var/lib/snapd/snap /snap 
+            sudo snap install termshark || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             ;;
         "fedora")
-            sudo dnf update
+            sudo dnf update -y
             sudo dnf install -y dialog bmon btop python3 python3-pip go || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
-            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
+            sudo dnf -y install snapd || { echo "Failed to install Snap. Check $log_file for details."; exit 1; }
+            exec $SHELL 
+            sudo ln -s /var/lib/snapd/snap /snap 
+            sudo snap install termshark || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             ;;
     esac
 
