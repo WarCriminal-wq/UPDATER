@@ -38,7 +38,6 @@ install_script() {
             sudo apt-get install speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             sudo apt install -y snapd || { echo "Failed to install Snap. Check $log_file for details."; exit 1; }
             exec $SHELL 
-            sudo ln -s /var/lib/snapd/snap /snap 
             sudo snap install termshark || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             ;;
         "fedora")
@@ -47,7 +46,6 @@ install_script() {
             pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             sudo dnf -y install snapd || { echo "Failed to install Snap. Check $log_file for details."; exit 1; }
             exec $SHELL 
-            sudo ln -s /var/lib/snapd/snap /snap 
             sudo snap install termshark || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             ;;
     esac
