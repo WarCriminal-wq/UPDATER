@@ -24,6 +24,7 @@ install_script() {
     local os_type=$1
     local script_url=$2
     local target_dir=$3
+    local program_variant=$4
 
     echo "Installing dependencies for $os_type..."
     case $os_type in
@@ -35,12 +36,12 @@ install_script() {
             sudo apt update || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
             sudo apt install -y dialog bmon btop python3-dev python3-pip golang termshark || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
-            sudo apt-get install speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
+            sudo apt-get install -y speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             
             ;;
         "fedora")
             sudo dnf update -y
-            sudo dnf install -y dialog bmon btop python3 python3-pip go wget || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo dnf install -y dialog bmon btop python3 python3-pip go wget curl|| { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             sudo dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
@@ -54,9 +55,9 @@ install_script() {
     esac
 
     echo "Downloading and installing the script..."
-    curl -L $script_url -o updater || { echo "Failed to download the script. Check $log_file for details."; exit 1; }
-    chmod +x updater || { echo "Failed to set execute permissions. Check $log_file for details."; exit 1; }
-    mv updater $target_dir || { echo "Failed to move the script. Check $log_file for details."; exit 1; }
+    git clone $script_url || { echo "Failed to download the script. Check $log_file for details."; exit 1; }
+    chmod +x ./$program_variant/updater || { echo "Failed to set execute permissions. Check $log_file for details."; exit 1; }
+    mv ./$program_variant/updater $target_dir || { echo "Failed to move the script. Check $log_file for details."; exit 1; }
 
     echo "Installation complete. The script has been moved to $target_dir."
 }
@@ -67,17 +68,17 @@ echo "installing UPDATER utility..."
 # Detect the operating system and distribution
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Detected macOS."
-    install_script "macos" "https://github.com/WarCriminal-wq/updater-macos" "$HOME/.local/bin" 2>&1 | tee -a "$log_file"
+    install_script "macos" "https://github.com/WarCriminal-wq/updater-macos" "$HOME/.local/bin" "updater-macos" 2>&1 | tee -a "$log_file"
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
     source ~/.zshrc
 elif [[ -f /etc/debian_version ]]; then
     echo "Detected Debian-based system."
     security_check
-    install_script "debian" "https://github.com/WarCriminal-wq/updater-debian" "/bin" 2>&1 | tee -a "$log_file"
+    install_script "debian" "https://github.com/WarCriminal-wq/updater-debian" "/bin" "updater-debian" 2>&1 | tee -a "$log_file"
 elif [[ -f /etc/fedora-release ]]; then
     echo "Detected Fedora-based system."
     security_check
-    install_script "fedora" "https://github.com/WarCriminal-wq/updater-fedora" "/bin" 2>&1 | tee -a "$log_file"
+    install_script "fedora" "https://github.com/WarCriminal-wq/updater-fedora" "/bin" "updater-fedora" 2>&1 | tee -a "$log_file"
 else
     echo "Unsupported operating system."
     exit 1
