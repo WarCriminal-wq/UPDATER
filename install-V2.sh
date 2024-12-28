@@ -28,29 +28,29 @@ install_script() {
     echo "Installing dependencies for $os_type..."
     case $os_type in
         "macos")
-            brew install dialog termshark bmon speedtest-cli btop >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            brew install dialog termshark bmon speedtest-cli btop || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             mkdir $HOME/.local/bin
             ;;
         "debian")
-            sudo apt update >> "$log_file" 2>&1 || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
-            sudo apt install -y dialog bmon btop python3-dev python3-pip go >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
-            curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash >> "$log_file" 2>&1 || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
-            sudo apt-get install speedtest >> "$log_file" 2>&1 || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
-            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 >> "$log_file" 2>&1 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
+            sudo apt update || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
+            sudo apt install -y dialog bmon btop python3-dev python3-pip go || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
+            sudo apt-get install speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
+            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             
             ;;
         "fedora")
             sudo dnf update
-            sudo dnf install -y dialog bmon btop python3 python3-pip go >> "$log_file" 2>&1 || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
-            pip3 install speedtest-cli >> "$log_file" 2>&1 || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
-            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 >> "$log_file" 2>&1 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
+            sudo dnf install -y dialog bmon btop python3 python3-pip go || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
+            go install github.com/gcla/termshark/v2/cmd/termshark@v2.4.0 || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
             ;;
     esac
 
     echo "Downloading and installing the script..."
-    curl -L $script_url -o updater >> "$log_file" 2>&1 || { echo "Failed to download the script. Check $log_file for details."; exit 1; }
-    chmod +x updater >> "$log_file" 2>&1 || { echo "Failed to set execute permissions. Check $log_file for details."; exit 1; }
-    mv updater $target_dir >> "$log_file" 2>&1 || { echo "Failed to move the script. Check $log_file for details."; exit 1; }
+    curl -L $script_url -o updater || { echo "Failed to download the script. Check $log_file for details."; exit 1; }
+    chmod +x updater || { echo "Failed to set execute permissions. Check $log_file for details."; exit 1; }
+    mv updater $target_dir || { echo "Failed to move the script. Check $log_file for details."; exit 1; }
 
     echo "Installation complete. The script has been moved to $target_dir."
 }
