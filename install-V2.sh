@@ -34,7 +34,8 @@ install_script() {
             ;;
         "debian")
             sudo apt update || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
-            sudo apt install -y dialog bmon btop python3-dev python3-pip golang termshark curl iproute2 iputils-ping fastfetch|| { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo apt install -y dialog bmon btop python3-dev python3-pip golang termshark curl iproute2 iputils-ping neofetch|| { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo apt install -y fastfetch || true
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install -y speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             
