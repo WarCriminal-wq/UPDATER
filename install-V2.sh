@@ -33,7 +33,7 @@ install_script() {
             ;;
         "debian")
             sudo apt update || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
-            sudo apt install -y dialog bmon btop python3-dev python3-pip go || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo apt install -y dialog bmon btop python3-dev python3-pip golang || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             sudo apt install -y snapd || { echo "Failed to install Snap. Check $log_file for details."; exit 1; }
