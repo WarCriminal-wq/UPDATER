@@ -33,20 +33,23 @@ install_script() {
             ;;
         "debian")
             sudo apt update || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
-            sudo apt install -y dialog bmon btop python3-dev python3-pip golang || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo apt install -y dialog bmon btop python3-dev python3-pip golang termshark || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
-            sudo apt install -y snapd || { echo "Failed to install Snap. Check $log_file for details."; exit 1; }
-            exec $SHELL 
-            sudo snap install termshark || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
+            
             ;;
         "fedora")
             sudo dnf update -y
-            sudo dnf install -y dialog bmon btop python3 python3-pip go || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo dnf install -y dialog bmon btop python3 python3-pip go wget || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
-            sudo dnf -y install snapd || { echo "Failed to install Snap. Check $log_file for details."; exit 1; }
-            exec $SHELL 
-            sudo snap install termshark || { echo "Failed to install Termshark. Check $log_file for details."; exit 1; }
+            sudo dnf install -y \
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+            sudo dnf install -y \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+            sudo dnf update -y
+            wget https://github.com/rpmsphere/noarch/raw/refs/heads/master/r/rpmsphere-release-40-1.noarch.rpm
+            rpm -Uvh rpmsphere-release*rpm
+            sudo dnf install -y termshark
             ;;
     esac
 
