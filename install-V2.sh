@@ -38,7 +38,7 @@ install_script() {
             sudo apt install -y fastfetch || true
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install -y speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
-            
+            pip3 install tldr --break-system-packages
             ;;
         "fedora")
             sudo dnf update -y
@@ -52,6 +52,7 @@ install_script() {
             wget https://github.com/rpmsphere/noarch/raw/refs/heads/master/r/rpmsphere-release-40-1.noarch.rpm
             rpm -Uvh rpmsphere-release*rpm
             sudo dnf install -y termshark
+            pip3 install tldr
             ;;
     esac
 
