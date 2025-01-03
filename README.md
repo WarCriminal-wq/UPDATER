@@ -50,6 +50,7 @@ updater
 ```
 ## OS support
 Currently, UPDATER only supports:
+
 Debian (https://github.com/WarCriminal-wq/updater-debian)
 
 Fedora (https://github.com/WarCriminal-wq/updater-fedora)
