@@ -40,13 +40,12 @@ Ensure the following dependencies are installed on your system for Updater to fu
 To install Updater, clone the repository and run the installation script:
 
 ```bash
-git clone https://github.com/WarCriminal-wq/UPDATER-end-of-sem-project-.git
-cd UPDATER-end-of-sem-project-
-./install-V2.sh
+curl -sSL https://raw.githubusercontent.com/WarCriminal-wq/UPDATER/main/install-V2.sh | bash
 
+```
 Usage
 Run the updater script to start the program:
-
+```
 updater
-
+```
 
