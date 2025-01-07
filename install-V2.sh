@@ -34,7 +34,9 @@ install_script() {
             ;;
         "debian")
             sudo apt update || { echo "Failed to update apt. Check $log_file for details."; exit 1; }
-            sudo apt install -y dialog bmon btop python3-dev python3-pip golang termshark curl iproute2 iputils-ping neofetch|| { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo apt install termshark # installing dialog with termshark will produce weird option selections. Best to install termshark before dialog
+            sleep 2
+            sudo apt install -y dialog bmon btop python3-dev python3-pip golang curl iproute2 iputils-ping neofetch|| { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             sudo apt install -y fastfetch || true
             curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash || { echo "Failed to add Speedtest repository. Check $log_file for details."; exit 1; }
             sudo apt-get install -y speedtest || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
@@ -42,7 +44,7 @@ install_script() {
             ;;
         "fedora")
             sudo dnf update -y
-            sudo dnf install -y dialog bmon btop python3 python3-pip go wget curl iproute iputils fastfetch || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo dnf install -y dialog bmon btop python3 python3-pip go wget curl iproute iputils fastfetch tshark || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             sudo dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
