@@ -42,7 +42,7 @@ install_script() {
             ;;
         "fedora")
             sudo dnf update -y
-            sudo dnf install -y dialog bmon btop python3 python3-pip go wget curl iproute2 iputils-ping fastfetch || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
+            sudo dnf install -y dialog bmon btop python3 python3-pip go wget curl iproute iputils fastfetch || { echo "Failed to install dependencies. Check $log_file for details."; exit 1; }
             pip3 install speedtest-cli || { echo "Failed to install Speedtest. Check $log_file for details."; exit 1; }
             sudo dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
